@@ -1,6 +1,7 @@
 <?php
 
 namespace MyProject\View;
+
 class View
 {
     private string $templatesPath;
