@@ -8,9 +8,9 @@
     <meta name="author" content="">
     <title><?= $title ?? 'Мой блог' ?></title>
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../css/clean-blog.min.css" rel="stylesheet">
+    <link href="../css/clean-blog.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
@@ -47,7 +47,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/">Главная</a>
                 </li>
                 <li>
                     <a href="about.html">About</a>
