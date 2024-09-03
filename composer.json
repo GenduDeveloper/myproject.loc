@@ -12,5 +12,7 @@
             "MyProject\\": "src/MyProject/"
         }
     },
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }
