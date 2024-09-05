@@ -27,6 +27,6 @@ class Db
             return null;
         }
 
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
