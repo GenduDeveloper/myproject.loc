@@ -1,6 +1,7 @@
 <?php
 
 namespace MyProject\Controllers;
+
 use MyProject\View\View;
 use MyProject\Services\Db;
 
@@ -17,13 +18,12 @@ class MainController
 
     public function main(): void
     {
-        $articles = $this->db->query('SELECT * FROM users;');
-        var_dump($articles);
-        //$this->view->renderHtml('main/main.php', ['articles' => $articles]);
-    }
+        $articles = $this->db->query(
+          'SELECT a.id, a.name, a.text, a.created_at, u.nickname
+          FROM articles AS a 
+          INNER JOIN users AS u ON u.id = a.author_id'
+        );
 
-    public function sayHello(string $name): void
-    {
-        $this->view->renderHtml('main/hello.php', ['title' => 'Страница приветствия', 'name' => $name]);
+        $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
 }
