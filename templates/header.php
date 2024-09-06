@@ -82,7 +82,7 @@
                 <?php else: ?>
                     <div class="site-heading">
                         <div class="text-background">
-                            <h1><?= $article['name'] ?></h1>
+                            <h1><?= $article->getName() ?></h1>
                             <hr class="small">
                         </div>
                     </div>

@@ -4,6 +4,7 @@ namespace MyProject\Controllers;
 
 use MyProject\View\View;
 use MyProject\Services\Db;
+use MyProject\Models\Articles\Article;
 
 class MainController
 {
@@ -19,10 +20,8 @@ class MainController
     public function main(): void
     {
         $articles = $this->db->query(
-          'SELECT a.id, a.name, a.text, a.created_at, u.nickname
-          FROM articles AS a 
-          INNER JOIN users AS u ON u.id = a.author_id'
-        );
+            'SELECT * FROM articles',
+            [], Article::class);
 
         $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }

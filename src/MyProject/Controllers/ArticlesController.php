@@ -2,6 +2,8 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Models\Articles\Article;
+use MyProject\Models\Users\User;
 use MyProject\Services\Db;
 use MyProject\View\View;
 
@@ -20,7 +22,7 @@ class ArticlesController
     {
         $article = $this->db->query(
             'SELECT * FROM articles WHERE id = :articleId',
-            [':articleId' => $articleId]
+            [':articleId' => $articleId], Article::class
         );
 
         if ($article === []) {
@@ -28,10 +30,10 @@ class ArticlesController
             return;
         }
 
-        $authorId = $article[0]['author_id'];
+        $authorId = $article[0]->getAuthorId();
         $author = $this->db->query(
             'SELECT nickname FROM users WHERE id = :authorId',
-            [':authorId' => $authorId]
+            [':authorId' => $authorId], User::class
         );
 
         $this->view->renderHtml('articles/view.php', ['article' => $article[0], 'author' => $author[0]]);

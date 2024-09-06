@@ -18,7 +18,7 @@ class Db
         $this->pdo->exec("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_general_ci'");
     }
 
-    public function query(string $sql, array $params = []): ?array
+    public function query(string $sql, array $params = [], string $className = 'stdClass'): ?array
     {
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute($params);
@@ -27,6 +27,6 @@ class Db
             return null;
         }
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, $className);
     }
 }

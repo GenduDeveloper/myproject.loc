@@ -6,13 +6,12 @@
             <?php foreach ($articles as $article): ?>
                 <div class="post-preview">
                     <h2 class="post-title">
-                        <a href="/articles/<?= $article['id'] ?>"><?= $article['name'] ?></a>
+                        <a href="/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
                     </h2>
                     <p>
-                        <?= $article['text'] ?>
+                        <?= $article->getText() ?>
                     </p>
-                    <p class="post-meta">Опубликовал <strong><?= $article['nickname'] ?></strong>
-                        в <?= $article['created_at'] ?></p>
+                    <p class="post-meta">Опубликованно в <?= $article->getCreatedAt() ?></p>
                 </div>
                 <hr>
             <?php endforeach; ?>
