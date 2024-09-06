@@ -11,7 +11,7 @@
                     <p>
                         <?= $article->getText() ?>
                     </p>
-                    <p class="post-meta">Опубликованно в <?= $article->getCreatedAt() ?></p>
+                    <p class="post-meta">Опубликовано в <?= $article->getCreatedAt() ?></p>
                 </div>
                 <hr>
             <?php endforeach; ?>
