@@ -26,7 +26,7 @@ abstract class ActiveRecordEntity
 
     public static function getById(int $id): ?self
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $entities = $db->query(
             'SELECT * FROM ' . static::getTableName() . ' WHERE id = :id',
             [':id' => $id], static::class);
@@ -36,7 +36,7 @@ abstract class ActiveRecordEntity
 
     public static function findAll(): array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         return $db->query('SELECT * FROM ' . static::getTableName(), [], static::class);
     }
 
