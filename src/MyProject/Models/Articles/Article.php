@@ -8,7 +8,6 @@ use MyProject\Models\Users\User;
 class Article extends ActiveRecordEntity
 {
     protected string $name;
-
     protected string $text;
     protected ?int $authorId = null;
     protected ?string $createdAt = null;
