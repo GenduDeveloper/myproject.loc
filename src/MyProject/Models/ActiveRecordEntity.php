@@ -6,7 +6,7 @@ use MyProject\Services\Db;
 
 abstract class ActiveRecordEntity
 {
-    protected int $id;
+    protected ?int $id = null;
 
     public function getId(): int
     {
@@ -24,6 +24,75 @@ abstract class ActiveRecordEntity
         return lcfirst(str_replace('_', '', ucwords($source, '_')));
     }
 
+    private function camelCaseToUnderscore(string $source): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $source));
+    }
+
+    private function mapPropertiesToDbFormat(): array
+    {
+        $reflector = new \ReflectionObject($this);
+        $properties = $reflector->getProperties();
+
+        $mappedProperties = [];
+        foreach ($properties as $property) {
+            $propertyName = $property->getName();
+            $propertyNameAsUnderscore = $this->camelCaseToUnderscore($propertyName);
+            $mappedProperties[$propertyNameAsUnderscore] = $this->$propertyName;
+        }
+
+        return $mappedProperties;
+    }
+
+    public function save(): void
+    {
+        $mappedProperties = $this->mapPropertiesToDbFormat();
+        if ($this->id !== null) {
+            $this->update($mappedProperties);
+        } else {
+            $this->insert($mappedProperties);
+        }
+    }
+
+    public function update(array $mappedProperties): void
+    {
+        $column2params = [];
+        $params2values = [];
+        $index = 1;
+        foreach ($mappedProperties as $column => $value) {
+            $param = ':param' . $index;
+            $column2params[] = $column . ' = ' . $param;
+            $params2values[$param] = $value;
+            $index++;
+        }
+        $sql = 'UPDATE ' . static::getTableName() . ' SET ' . implode(', ', $column2params) . ' WHERE id = ' . $this->id;
+        $db = Db::getInstance();
+        $db->query($sql, $params2values, static::class);
+    }
+
+    public function insert(array $mappedProperties): void
+    {
+        $columns = [];
+        $params = [];
+        $params2values = [];
+        $index = 1;
+        foreach ($mappedProperties as $column => $value) {
+            $columns[] = $column;
+            $param = ':param' . $index;
+            $params[] = $param;
+            $params2values[$param] = $value;
+            $index++;
+        }
+        $sql = 'INSERT INTO ' . static::getTableName() . ' (' . implode(', ', $columns) . ')' .
+            ' VALUES (' . implode(', ', $params) . ')';
+        $db = Db::getInstance();
+        $db->query($sql, $params2values, static::class);
+    }
+
+    /**
+     * @param int $id
+     * @return static|null
+     */
     public static function getById(int $id): ?self
     {
         $db = Db::getInstance();
