@@ -34,10 +34,10 @@
     </div>
 </footer>
 <!-- jQuery -->
-<script src="../www/js/jquery.js"></script>
+<script src="/js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="../www/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- Custom Theme JavaScript -->
-<script src="../www/js/clean-blog.min.js"></script>
+<script src="/js/clean-blog.min.js"></script>
 </body>
 </html>
