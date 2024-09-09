@@ -72,21 +72,31 @@ abstract class ActiveRecordEntity
 
     public function insert(array $mappedProperties): void
     {
+        $filteredProperties = array_filter($mappedProperties);
+
         $columns = [];
-        $params = [];
+        $preparedParams = [];
         $params2values = [];
-        $index = 1;
-        foreach ($mappedProperties as $column => $value) {
+        foreach ($filteredProperties as $column => $value) {
             $columns[] = $column;
-            $param = ':param' . $index;
-            $params[] = $param;
+            $param = ':' . $column;
+            $preparedParams[] = $param;
             $params2values[$param] = $value;
-            $index++;
         }
-        $sql = 'INSERT INTO ' . static::getTableName() . ' (' . implode(', ', $columns) . ')' .
-            ' VALUES (' . implode(', ', $params) . ')';
-        $db = Db::getInstance();
+        $sql = 'INSERT INTO ' . static::getTableName() . ' (' . implode(', ', $columns) .
+            ')' . ' VALUES ' . '(' . implode(', ', $preparedParams) . ')';
+        $db = DB::getInstance();
         $db->query($sql, $params2values, static::class);
+        $this->id = $db->getLastInsertId();
+        $this->refresh();
+    }
+
+    private function refresh(): void
+    {
+        $objectFromDb = static::getById($this->id);
+        foreach ($objectFromDb as $property => $value) {
+            $this->$property = $value;
+        }
     }
 
     /**
