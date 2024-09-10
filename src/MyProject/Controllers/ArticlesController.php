@@ -2,6 +2,7 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Exceptions\NotFoundException;
 use MyProject\Models\Articles\Article;
 use MyProject\View\View;
 use MyProject\Models\Users\User;
@@ -15,25 +16,29 @@ class ArticlesController
         $this->view = new View(__DIR__ . '/../../../templates');
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function view(int $articleId): void
     {
         $article = Article::getById($articleId);
 
         if ($article === null) {
-            $this->view->renderHtml('errors/404.php', [], 404);
-            return;
+            throw new NotFoundException();
         }
 
         $this->view->renderHtml('articles/view.php', ['article' => $article]);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function edit(int $articleId): void
     {
         $article = Article::getById($articleId);
 
         if ($article === null) {
-            $this->view->renderHtml('errors/404.php', [], 404);
-            return;
+            throw new NotFoundException();
         }
 
         $article->setName('Новое имя статьи');
@@ -53,16 +58,17 @@ class ArticlesController
         $article->save();
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function delete(int $articleId): void
     {
         $article = Article::getById($articleId);
 
         if ($article === null) {
-            $this->view->renderHtml('errors/404.php', [], 404);
-            return;
+            throw new NotFoundException();
         }
 
         $article->delete();
-        var_dump($article);
     }
 }
