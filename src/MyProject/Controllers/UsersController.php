@@ -6,18 +6,11 @@ use MyProject\Exceptions\InvalidActivationException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Models\Users\User;
 use MyProject\Models\Users\UserActivationService;
+use MyProject\Models\Users\UserAuthService;
 use MyProject\Services\EmailSender;
-use MyProject\View\View;
 
-class UsersController
+class UsersController extends AbstractController
 {
-    private View $view;
-
-    public function __construct()
-    {
-        $this->view = new View(__DIR__ . '/../../../templates');
-    }
-
     public function signUp(): void
     {
         if (!empty($_POST)) {
@@ -77,4 +70,31 @@ class UsersController
             );
         }
     }
+
+    public function login(): void
+    {
+        if (!empty($_POST)) {
+            try {
+                $user = User::login($_POST);
+                UserAuthService::createToken($user);
+                header('Location: /');
+                exit();
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('users/login.php', ['error' => $e->getMessage()]);
+                return;
+            }
+        }
+
+        $this->view->renderHtml('users/login.php', ['pageName' => 'Авторизация']);
+    }
+
+    public function logout(): void
+    {
+        if ($this->user !== null) {
+            UserAuthService::logout();
+            header('Location: /');
+            exit();
+        }
+    }
+
 }

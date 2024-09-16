@@ -2,18 +2,10 @@
 
 namespace MyProject\Controllers;
 
-use MyProject\View\View;
 use MyProject\Models\Articles\Article;
 
-class MainController
+class MainController extends AbstractController
 {
-    private View $view;
-
-    public function __construct()
-    {
-        $this->view = new View(__DIR__ . '/../../../templates');
-    }
-
     public function main(): void
     {
         $articles = Article::findAll();
