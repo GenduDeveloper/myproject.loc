@@ -36,6 +36,11 @@
                 <li>
                     <a href="/">Главная</a>
                 </li>
+                <?php if (!empty($user) && $user->isAdmin()): ?>
+                    <li>
+                        <a href="/articles/add">Создать статью</a>
+                    </li>
+                <?php endif; ?>
                 <?php if (!empty($user)): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#">Привет, <?= $user->getNickname() ?? 'Войдите в систему' ?></a>

@@ -32,4 +32,10 @@ try {
 } catch (\MyProject\Exceptions\NotFoundException $e) {
     $view = new MyProject\View\View(__DIR__ . '/../templates');
     $view->renderHtml('errors/404.php', ['error' => $e->getMessage()], 404);
+} catch (\MyProject\Exceptions\UnauthorizedException $e) {
+    $view = new \MyProject\View\View(__DIR__ . '/../templates');
+    $view->renderHtml('errors/401.php', ['error' => $e->getMessage()], 401);
+} catch (\MyProject\Exceptions\ForbiddenException $e) {
+    $view = new \MyProject\View\View(__DIR__ . '/../templates');
+    $view->renderHtml('errors/403.php', ['error' => $e->getMessage()], 403);
 }
