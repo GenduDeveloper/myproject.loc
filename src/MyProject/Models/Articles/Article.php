@@ -2,6 +2,8 @@
 
 namespace MyProject\Models\Articles;
 
+use MyProject\Exceptions\InvalidActivationException;
+use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Models\ActiveRecordEntity;
 use MyProject\Models\Users\User;
 
@@ -68,5 +70,24 @@ class Article extends ActiveRecordEntity
     protected static function getTableName(): string
     {
         return 'articles';
+    }
+
+    public static function createNewArticle(array $field, User $author): Article
+    {
+        if (empty($field['name'])) {
+            throw new InvalidArgumentException('Не передано имя статьи');
+        }
+
+        if (empty($field['text'])) {
+            throw new InvalidArgumentException('Не передан текст статьи');
+        }
+
+        $article = new Article();
+        $article->setName($field['name']);
+        $article->setText($field['text']);
+        $article->setAuthor($author);
+
+        $article->save();
+        return $article;
     }
 }

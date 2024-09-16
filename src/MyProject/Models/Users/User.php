@@ -35,6 +35,16 @@ class User extends ActiveRecordEntity
         return $this->passwordHash;
     }
 
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
     protected static function getTableName(): string
     {
         return 'users';
