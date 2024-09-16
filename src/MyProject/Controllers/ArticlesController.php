@@ -4,18 +4,10 @@ namespace MyProject\Controllers;
 
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Models\Articles\Article;
-use MyProject\View\View;
 use MyProject\Models\Users\User;
 
-class ArticlesController
+class ArticlesController extends AbstractController
 {
-    private View $view;
-
-    public function __construct()
-    {
-        $this->view = new View(__DIR__ . '/../../../templates');
-    }
-
     /**
      * @throws NotFoundException
      */

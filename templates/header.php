@@ -36,15 +36,22 @@
                 <li>
                     <a href="/">Главная</a>
                 </li>
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-                <li>
-                    <a href="post.html">Sample Post</a>
-                </li>
-                <li>
-                    <a href="/users/register">Регистрация</a>
-                </li>
+                <?php if (!empty($user)): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#">Привет, <?= $user->getNickname() ?? 'Войдите в систему' ?></a>
+                        <div class="dropdown-content">
+                            <a class="dropdown-item" href="">Мой профиль</a>
+                            <a class="dropdown-item" href="/users/logout">Выйти</a>
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="/users/login">Вход</a>
+                    </li>
+                    <li>
+                        <a href="/users/register">Регистрация</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

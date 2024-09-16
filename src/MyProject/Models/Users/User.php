@@ -30,6 +30,11 @@ class User extends ActiveRecordEntity
         return $this->isConfirmed;
     }
 
+    public function getPasswordHash(): string
+    {
+        return $this->passwordHash;
+    }
+
     protected static function getTableName(): string
     {
         return 'users';
@@ -89,4 +94,43 @@ class User extends ActiveRecordEntity
         $this->isConfirmed = true;
         $this->save();
     }
+
+    public static function login(array $userData): User
+    {
+        if (empty($userData['email'])) {
+            throw new InvalidArgumentException('Не передан адрес электронной почты');
+        }
+
+        if (empty($userData['password'])) {
+            throw new InvalidArgumentException('Не передан пароль');
+        }
+
+        $user = User::findOneByColumn('email', $userData['email']);
+        if ($user === null) {
+            throw new InvalidArgumentException('Такого пользователя не существует');
+        }
+
+        /**
+         * @var User $user
+         */
+        if (!password_verify($userData['password'], $user->getPasswordHash())) {
+            throw new InvalidArgumentException('Неправильный пароль');
+        }
+
+        $user->refreshAuthToken();
+        $user->save();
+
+        return $user;
+    }
+
+    public function getAuthToken(): string
+    {
+        return $this->authToken;
+    }
+
+    private function refreshAuthToken(): void
+    {
+        $this->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
+    }
+
 }
