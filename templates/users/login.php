@@ -10,7 +10,7 @@
         <div class="form-group">
             <label for="email">Адрес электронной почты</label>
             <input type="email" class="form-control" placeholder="Адрес электронной почты" id="email" name="email"
-                   value="<?= $_POST['email'] ?? '' ?>">
+                   value="<?= htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>

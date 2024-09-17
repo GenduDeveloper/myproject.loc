@@ -2,7 +2,6 @@
 
 namespace MyProject\Models\Articles;
 
-use MyProject\Exceptions\InvalidActivationException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Models\ActiveRecordEntity;
 use MyProject\Models\Users\User;
@@ -89,5 +88,22 @@ class Article extends ActiveRecordEntity
 
         $article->save();
         return $article;
+    }
+
+    public function editArticleById(array $field): Article
+    {
+        if (empty($field['name'])) {
+            throw new InvalidArgumentException('Не передано новое имя статьи');
+        }
+
+        if (empty($field['text'])) {
+            throw new InvalidArgumentException('Не передан новый текст статьи');
+        }
+
+        $this->setName($field['name']);
+        $this->setText($field['text']);
+
+        $this->save();
+        return $this;
     }
 }

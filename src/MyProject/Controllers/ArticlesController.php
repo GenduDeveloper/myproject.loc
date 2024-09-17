@@ -35,9 +35,27 @@ class ArticlesController extends AbstractController
             throw new NotFoundException();
         }
 
-        $article->setName('Новое имя статьи');
-        $article->setText('Новый текст статьи');
-        $article->save();
+        if ($this->user === null) {
+            throw new UnauthorizedException('Вы не авторизованы');
+        }
+
+        if (!$this->user->isAdmin()) {
+            throw new ForbiddenException('У вас недостаточно прав');
+        }
+
+        if (!empty($_POST)) {
+            try {
+                $article->editArticleById($_POST);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('articles/edit.php', ['error' => $e->getMessage(), 'article' => $article]);
+                return;
+            }
+
+            header('Location: /articles/' . $article->getId(), true, 302);
+            exit();
+        }
+
+        $this->view->renderHtml('articles/edit.php', ['pageName' => 'Редактирование статьи', 'article' => $article]);
     }
 
     public function add(): void
