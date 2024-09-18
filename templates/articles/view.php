@@ -8,7 +8,9 @@
                 <p class="post-meta"><strong>Автор статьи:</strong> <?= $article->getAuthor()->getNickname() ?>.</p>
                 <?php if ($user !== null && $user->isAdmin()): ?>
                     <a style="width: 300px" href="/articles/<?= $article->getId() ?>/edit"
-                       class="btn btn-primary">Редактировать</a>
+                       class="btn btn-primary">Редактировать</a><br><br>
+                    <a style="width: 300px" href="/articles/<?= $article->getId() ?>/delete"
+                       class="btn btn-danger">Удалить</a>
                 <?php endif; ?>
             </div>
         </div>

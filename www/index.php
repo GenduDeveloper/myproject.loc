@@ -38,4 +38,7 @@ try {
 } catch (\MyProject\Exceptions\ForbiddenException $e) {
     $view = new \MyProject\View\View(__DIR__ . '/../templates');
     $view->renderHtml('errors/403.php', ['error' => $e->getMessage()], 403);
+} catch (\MyProject\Exceptions\UserNotFoundException|\MyProject\Exceptions\ArticlesNotFoundException $e) {
+    $view = new \MyProject\View\View(__DIR__ . '/../templates');
+    $view->renderHtml('errors/404.php', ['error' => $e->getMessage()], 404);
 }
