@@ -43,9 +43,9 @@
                 <?php endif; ?>
                 <?php if (!empty($user)): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#">Привет, <?= $user->getNickname() ?? 'Войдите в систему' ?></a>
+                        <a class="nav-link" href="">Привет, <?= $user->getNickname() ?? 'Войдите в систему' ?></a>
                         <div class="dropdown-content">
-                            <a class="dropdown-item" href="">Мой профиль</a>
+                            <a class="dropdown-item" href="/users/profile">Мой профиль</a>
                             <a class="dropdown-item" href="/users/logout">Выйти</a>
                         </div>
                     </li>

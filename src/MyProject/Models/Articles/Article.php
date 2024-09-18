@@ -10,7 +10,7 @@ class Article extends ActiveRecordEntity
 {
     protected string $name;
     protected string $text;
-    protected ?int $authorId = null;
+    protected int $authorId;
     protected ?string $createdAt = null;
 
     /**
@@ -26,7 +26,7 @@ class Article extends ActiveRecordEntity
         $this->authorId = $author->getId();
     }
 
-    public function getAuthorId(): ?int
+    public function getAuthorId(): int
     {
         return $this->authorId;
     }

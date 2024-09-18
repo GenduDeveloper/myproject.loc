@@ -10,12 +10,12 @@
         <div class="form-group">
             <label for="nickname">Имя профиля</label>
             <input type="text" class="form-control" placeholder="Имя профиля" id="nickname" name="nickname"
-                   value="<?= $_POST['nickname'] ?? '' ?>">
+                   value="<?= htmlspecialchars($_POST['nickname'] ?? '') ?>">
         </div>
         <div class="form-group">
             <label for="email">Адрес электронной почты</label>
             <input type="email" class="form-control" placeholder="Адрес электронной почты" id="email" name="email"
-                   value="<?= $_POST['email'] ?? '' ?>">
+                   value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>

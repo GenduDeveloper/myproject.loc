@@ -10,4 +10,5 @@ return [
     '~^users/login$~' => [\MyProject\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\MyProject\Controllers\UsersController::class, 'logout'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main'],
+    '~^users/profile~' => [\MyProject\Controllers\ProfileController::class, 'showProfile'],
 ];
