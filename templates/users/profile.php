@@ -17,8 +17,8 @@
                readonly>
     </div>
     <br>
-    <a style="width: 300px" href="#"
-       class="btn btn-primary">Изменить пароль</a>
+    <a style="width: 300px" href="/users/profile/edit"
+       class="btn btn-primary">Редактировать профиль</a>
 </div>
 
 <?php include_once __DIR__ . '/../footer.php' ?>

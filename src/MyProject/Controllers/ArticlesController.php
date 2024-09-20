@@ -68,6 +68,7 @@ class ArticlesController extends AbstractController
             throw new ForbiddenException('У вас недостаточно прав');
         }
 
+
         if (!empty($_POST)) {
             try {
                 $article = Article::createNewArticle($_POST, $this->user);

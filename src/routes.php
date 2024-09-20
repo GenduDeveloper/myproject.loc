@@ -10,5 +10,8 @@ return [
     '~^users/login$~' => [\MyProject\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\MyProject\Controllers\UsersController::class, 'logout'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main'],
-    '~^users/profile~' => [\MyProject\Controllers\ProfileController::class, 'showProfile'],
+    '~^users/profile$~' => [\MyProject\Controllers\ProfileController::class, 'showProfile'],
+    '~^users/profile/edit$~' => [\MyProject\Controllers\ProfileController::class, 'editProfile'],
+    '~^users/profile/edit/name$~' => [\MyProject\Controllers\ProfileController::class, 'editName'],
+    '~^users/profile/edit/password$~' => [\MyProject\Controllers\ProfileController::class, 'editPassword'],
 ];
