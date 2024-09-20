@@ -20,6 +20,11 @@ class User extends ActiveRecordEntity
         return $this->nickname;
     }
 
+    public function setNickname(string $nickname): void
+    {
+        $this->nickname = $nickname;
+    }
+
     public function getEmail(): string
     {
         return $this->email;
@@ -33,6 +38,11 @@ class User extends ActiveRecordEntity
     public function getPasswordHash(): string
     {
         return $this->passwordHash;
+    }
+
+    public function setPasswordHash(string $passwordHash): void
+    {
+        $this->passwordHash = $passwordHash;
     }
 
     public function getRole(): string
@@ -141,6 +151,59 @@ class User extends ActiveRecordEntity
     private function refreshAuthToken(): void
     {
         $this->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
+    }
+
+    public static function updateName(array $userData, User $user): User
+    {
+        if (empty($userData['new_nickname'])) {
+            throw new InvalidArgumentException('Не передано новое имя');
+        }
+
+        if (!preg_match('~^[a-zA-Z0-9]+$~', $userData['new_nickname'])) {
+            throw new InvalidArgumentException('Имя профиля может состоять только из символов латинского алфавита и цифр');
+        }
+
+        if (static::findOneByColumn('nickname', $userData['new_nickname']) !== null) {
+            throw new InvalidArgumentException('Такое имя уже существует');
+        }
+
+        $user->setNickname($userData['new_nickname']);
+        $user->save();
+
+        return $user;
+    }
+
+    public static function checkPasswordVerification(string $password, User $user): bool
+    {
+        return password_verify($password, $user->getPasswordHash());
+    }
+
+    public static function updatePassword(array $userData, User $user): User
+    {
+        if (!self::checkPasswordVerification($userData['password'], $user)) {
+            throw new InvalidArgumentException('Введен неправильный пароль');
+        }
+
+        if (empty($userData['new_password'])) {
+            throw new InvalidArgumentException('Не передан новый пароль');
+        }
+
+        if (mb_strlen($userData['new_password']) < 8) {
+            throw new InvalidArgumentException('Пароль должен быть не менее 8 символов');
+        }
+
+        if (empty($userData['new_password_repeat'])) {
+            throw new InvalidArgumentException('Вы не повторили новый пароль');
+        }
+
+        if ($userData['new_password'] !== $userData['new_password_repeat']) {
+            throw new InvalidArgumentException('Новый пароль не совпадает');
+        }
+
+        $user->setPasswordHash(password_hash($userData['new_password'], PASSWORD_DEFAULT));
+        $user->save();
+
+        return $user;
     }
 
 }
