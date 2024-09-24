@@ -17,7 +17,7 @@
             <?php endforeach; ?>
             <ul class="pager">
                 <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
+                    <a href="#">Следующая страница &rarr;</a>
                 </li>
             </ul>
         </div>

@@ -28,3 +28,13 @@ CREATE TABLE `users_activation_codes`
     `code`    VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `comments`
+(
+    `id`         INT(11) NOT NULL AUTO_INCREMENT,
+    `author_id`  INT(11) NOT NULL,
+    `article_id` INT(11) NOT NULL,
+    `text`       TEXT     NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -7,6 +7,7 @@ use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Models\Articles\Article;
+use MyProject\Models\Comments\Comment;
 
 class ArticlesController extends AbstractController
 {
@@ -21,7 +22,9 @@ class ArticlesController extends AbstractController
             throw new NotFoundException();
         }
 
-        $this->view->renderHtml('articles/view.php', ['article' => $article]);
+        $comments = Comment::findCommentsByArticleId($articleId);
+
+        $this->view->renderHtml('articles/view.php', ['article' => $article, 'comments' => $comments]);
     }
 
     /**
