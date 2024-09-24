@@ -428,6 +428,10 @@ hr.small {
   margin-bottom: 15px;
 }
 
+.hr-solid {
+  border-top: 1px solid #494848;
+}
+
 .btn {
   width: 100%;
 }
