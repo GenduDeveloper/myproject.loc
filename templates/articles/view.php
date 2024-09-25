@@ -40,6 +40,12 @@
                                 <div class="media-body">
                                     <h6 class="mt-0"><?= $comment->getAuthorComment()->getNickname() ?></h6>
                                     <?= $comment->getComment() ?>
+                                    <?php if ($user !== null): ?>
+                                        <?php if ($user->getId() === $comment->getAuthorId() || $user->isAdmin()): ?>
+                                            <a style="width: 300px" href="/comments/<?= $comment->getId() ?>/edit"
+                                               class="btn btn-warning">Изменить</a><br>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
