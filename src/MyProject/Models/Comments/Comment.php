@@ -39,6 +39,11 @@ class Comment extends ActiveRecordEntity
         $this->articleId = $articleId;
     }
 
+    public function getArticleId(): int
+    {
+        return $this->articleId;
+    }
+
     public function setComment(string $comment): void
     {
         $this->comment = $comment;
@@ -82,4 +87,14 @@ class Comment extends ActiveRecordEntity
         return $comment;
     }
 
+    public static function editCommentById(array $userData, Comment $comment): Comment
+    {
+        if (empty($userData['comment'])) {
+            throw new InvalidArgumentException('Не передан комментарий');
+        }
+
+        $comment->setComment($userData['comment']);
+        $comment->save();
+        return $comment;
+    }
 }
