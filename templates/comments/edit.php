@@ -17,6 +17,9 @@
                       cols="80"><?= htmlspecialchars($_POST['comment'] ?? $comment->getComment()) ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Изменить</button>
+        <br>
+        <a style="width: 300px" href="/comments/<?= $comment->getId() ?>/delete"
+           class="btn btn-danger">Удалить</a><br>
     </form>
 </div>
 

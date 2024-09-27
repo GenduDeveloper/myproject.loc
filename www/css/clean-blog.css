@@ -436,8 +436,12 @@ hr.small {
   width: 100%;
 }
 
+.comments:hover {
+  background-color: #0056b3;
+}
+
 .post-preview > a {
-  color: #404040;
+  color: #ffffff;
 }
 .post-preview > a:hover,
 .post-preview > a:focus {

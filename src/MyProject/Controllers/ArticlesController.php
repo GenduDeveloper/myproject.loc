@@ -24,7 +24,11 @@ class ArticlesController extends AbstractController
 
         $comments = Comment::findCommentsByArticleId($articleId);
 
-        $this->view->renderHtml('articles/view.php', ['article' => $article, 'comments' => $comments]);
+        $this->view->renderHtml('articles/view.php',
+            [
+                'article' => $article,
+                'comments' => $comments
+            ]);
     }
 
     /**
@@ -50,7 +54,11 @@ class ArticlesController extends AbstractController
             try {
                 $article->editArticleById($_POST);
             } catch (InvalidArgumentException $e) {
-                $this->view->renderHtml('articles/edit.php', ['error' => $e->getMessage(), 'article' => $article]);
+                $this->view->renderHtml('articles/edit.php',
+                    [
+                        'error' => $e->getMessage(),
+                        'article' => $article
+                    ]);
                 return;
             }
 
@@ -58,7 +66,11 @@ class ArticlesController extends AbstractController
             exit();
         }
 
-        $this->view->renderHtml('articles/edit.php', ['pageName' => 'Редактирование статьи', 'article' => $article]);
+        $this->view->renderHtml('articles/edit.php',
+            [
+                'pageName' => 'Редактирование статьи',
+                'article' => $article
+            ]);
     }
 
     public function add(): void
@@ -84,7 +96,10 @@ class ArticlesController extends AbstractController
             exit();
         }
 
-        $this->view->renderHtml('articles/add.php', ['pageName' => 'Создание новой статьи']);
+        $this->view->renderHtml('articles/add.php',
+            [
+                'pageName' => 'Создание новой статьи'
+            ]);
     }
 
     /**
@@ -98,6 +113,8 @@ class ArticlesController extends AbstractController
             throw new NotFoundException();
         }
 
+        $comments = Comment::findCommentsByArticleId($articleId);
+
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
         }
@@ -106,7 +123,15 @@ class ArticlesController extends AbstractController
             throw new ForbiddenException('У вас недостаточно прав');
         }
 
+        foreach ($comments as $comment) {
+            $comment->delete();
+        }
+
         $article->delete();
-        $this->view->renderHtml('articles/deleteSuccessful.php', ['pageName' => 'Удаление статьи']);
+
+        $this->view->renderHtml('articles/deleteSuccessful.php',
+            [
+                'pageName' => 'Удаление статьи'
+            ]);
     }
 }

@@ -51,6 +51,17 @@ class Article extends ActiveRecordEntity
         return $this->text;
     }
 
+    public function getShortText(): string
+    {
+        $fullText = $this->getText();
+
+        if (mb_strlen($fullText) > 100) {
+            return mb_substr($fullText, 0, 100) . '...';
+        }
+
+        return $fullText;
+    }
+
     public function setText(string $text): void
     {
         $this->text = $text;
@@ -106,4 +117,5 @@ class Article extends ActiveRecordEntity
         $this->save();
         return $this;
     }
+
 }
