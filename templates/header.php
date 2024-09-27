@@ -40,6 +40,9 @@
                     <li>
                         <a href="/articles/add">Создать статью</a>
                     </li>
+                    <li>
+                        <a href="/admin">Админка</a>
+                    </li>
                 <?php endif; ?>
                 <?php if (!empty($user)): ?>
                     <li class="nav-item dropdown">

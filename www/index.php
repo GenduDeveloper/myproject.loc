@@ -1,8 +1,8 @@
 <?php
 
-try {
-    require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
+try {
     $route = $_GET['route'] ?? '';
     $routes = require __DIR__ . '/../src/routes.php';
 
@@ -18,6 +18,7 @@ try {
     if (!$isRouteFound) {
         throw new \MyProject\Exceptions\NotFoundException();
     }
+
 
     unset($matches[0]);
 

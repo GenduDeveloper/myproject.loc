@@ -180,6 +180,10 @@ class User extends ActiveRecordEntity
 
     public static function updatePassword(array $userData, User $user): User
     {
+        if (empty($userData['password'])) {
+            throw new InvalidArgumentException('Не передан текущий пароль');
+        }
+
         if (!self::checkPasswordVerification($userData['password'], $user)) {
             throw new InvalidArgumentException('Введен неправильный пароль');
         }

@@ -3,6 +3,7 @@
 namespace MyProject\Controllers;
 
 use MyProject\Exceptions\AccessDeniedException;
+use MyProject\Exceptions\ForbiddenException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\UnauthorizedException;
@@ -59,12 +60,40 @@ class CommentsController extends AbstractController
                 header("Location: /articles/{$comment->getArticleId()}#comment{$comment->getId()}");
                 exit();
             } catch (InvalidArgumentException $e) {
-                $this->view->renderHtml('comments/edit.php', ['error' => $e->getMessage(), 'comment' => $comment]);
+                $this->view->renderHtml('comments/edit.php',
+                    [
+                        'error' => $e->getMessage(),
+                        'comment' => $comment
+                    ]);
                 return;
             }
 
         }
 
-        $this->view->renderHtml('comments/edit.php', ['pageName' => 'Измененние комментария', 'comment' => $comment]);
+        $this->view->renderHtml('comments/edit.php',
+            [
+                'pageName' => 'Изменение комментария',
+                'comment' => $comment
+            ]);
+    }
+
+    public function deleteComment(int $commentId): void
+    {
+        if ($this->user === null) {
+            throw new UnauthorizedException('Вы не авторизованы');
+        }
+
+        if (!$this->user->isAdmin()) {
+            throw new ForbiddenException('У вас недостаточно прав');
+        }
+
+        $comment = Comment::getById($commentId);
+
+        if ($comment === null) {
+            throw new NotFoundException();
+        }
+
+        $comment->delete();
+        $this->view->renderHtml('admins/deleteSuccessful.php', ['pageName' => 'Удаление комментария']);
     }
 }

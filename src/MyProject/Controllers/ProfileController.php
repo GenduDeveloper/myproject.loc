@@ -22,7 +22,11 @@ class ProfileController extends AbstractController
             throw new UserNotFoundException('Пользователь не найден');
         }
 
-        $this->view->renderHtml('users/profile.php', ['pageName' => 'Ваш профиль', 'user' => $user]);
+        $this->view->renderHtml('users/profile.php',
+            [
+                'pageName' => 'Ваш профиль',
+                'user' => $user
+            ]);
     }
 
     public function editProfile(): void
@@ -38,7 +42,11 @@ class ProfileController extends AbstractController
             throw new UserNotFoundException('Пользователь не найден');
         }
 
-        $this->view->renderHtml('users/editProfile.php', ['pageName' => 'Редактирование профиля', 'user' => $user]);
+        $this->view->renderHtml('users/editProfile.php',
+            [
+                'pageName' => 'Редактирование профиля',
+                'user' => $user
+            ]);
     }
 
     public function editName(): void
@@ -57,7 +65,10 @@ class ProfileController extends AbstractController
         try {
             if (!empty($_POST)) {
                 User::updateName($_POST, $user);
-                $this->view->renderHtml('users/editProfile.php', ['successfully' => 'Успешно обновлено']);
+                $this->view->renderHtml('users/editProfile.php',
+                    [
+                        'successfully' => 'Успешно обновлено'
+                    ]);
                 return;
             }
         } catch (InvalidArgumentException $e) {
@@ -65,7 +76,11 @@ class ProfileController extends AbstractController
             return;
         }
 
-        $this->view->renderHtml('users/editProfile.php', ['pageName' => 'Редактирование профиля', 'user' => $user]);
+        $this->view->renderHtml('users/editProfile.php',
+            [
+                'pageName' => 'Редактирование профиля',
+                'user' => $user
+            ]);
     }
 
     public function editPassword(): void
@@ -83,15 +98,19 @@ class ProfileController extends AbstractController
 
         try {
             if (!empty($_POST)) {
-                    User::updatePassword($_POST, $user);
-                    $this->view->renderHtml('users/editProfile.php', ['successfully' => 'Успешно обновлено']);
-                    return;
+                User::updatePassword($_POST, $user);
+                $this->view->renderHtml('users/editProfile.php', ['successfully' => 'Успешно обновлено']);
+                return;
             }
         } catch (InvalidArgumentException $e) {
             $this->view->renderHtml('users/editProfile.php', ['error' => $e->getMessage()]);
             return;
         }
 
-        $this->view->renderHtml('users/editProfile.php', ['pageName' => 'Редактирование профиля', 'user' => $user]);
+        $this->view->renderHtml('users/editProfile.php',
+            [
+                'pageName' => 'Редактирование профиля',
+                'user' => $user
+            ]);
     }
 }

@@ -15,7 +15,10 @@ class MainController extends AbstractController
             throw new ArticlesNotFoundException('Не найдено ни одной статьи');
         }
 
-        $this->view->renderHtml('main/main.php', ['articles' => $articles]);
+        $this->view->renderHtml('main/main.php',
+            [
+                'articles' => $articles
+            ]);
     }
 
 }

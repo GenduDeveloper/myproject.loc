@@ -18,6 +18,11 @@
                       cols="80"><?= htmlspecialchars($_POST['text'] ?? $article->getText(), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Редактировать</button>
+        <br>
+        <div class="form-group">
+            <a style="width: 300px" href="/articles/<?= $article->getId() ?>/delete"
+                                   class="btn btn-danger">Удалить</a>
+        </div>
     </form>
 </div>
 

@@ -31,7 +31,10 @@ class UsersController extends AbstractController
                         'code' => $code
                     ]);
 
-                $this->view->renderHtml('users/signUpSuccessful.php', ['pageName' => 'Регистрация прошла успешна']);
+                $this->view->renderHtml('users/signUpSuccessful.php',
+                    [
+                        'pageName' => 'Регистрация прошла успешна'
+                    ]);
                 return;
             }
         }

@@ -9,8 +9,6 @@
                     <?php if ($user !== null && $user->isAdmin()): ?>
                         <a style="width: 300px" href="/articles/<?= $article->getId() ?>/edit"
                            class="btn btn-primary">Редактировать</a><br><br>
-                        <a style="width: 300px" href="/articles/<?= $article->getId() ?>/delete"
-                           class="btn btn-danger">Удалить</a>
                     <?php endif; ?>
                     <br><br>
                     <?php if (!empty($error)): ?>
