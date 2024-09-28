@@ -11,7 +11,7 @@ class Comment extends ActiveRecordEntity
 {
     protected int $authorId;
     protected int $articleId;
-    protected ?string $comment;
+    protected string $comment;
     protected ?string $createdAt = null;
 
     protected static function getTableName(): string
