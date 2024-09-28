@@ -7,7 +7,7 @@ use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Exceptions\UserNotFoundException;
 use MyProject\Models\Users\User;
 
-class ProfileController extends AbstractController
+class ProfilesController extends AbstractController
 {
     public function showProfile(): void
     {
