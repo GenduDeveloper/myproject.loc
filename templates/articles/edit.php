@@ -19,10 +19,8 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Редактировать</button>
         <br>
-        <div class="form-group">
-            <a style="width: 300px" href="/articles/<?= $article->getId() ?>/delete"
-                                   class="btn btn-danger">Удалить</a>
-        </div>
+        <a href="/articles/<?= $article->getId() ?>/delete"
+           class="btn btn-danger">Удалить</a>
     </form>
 </div>
 

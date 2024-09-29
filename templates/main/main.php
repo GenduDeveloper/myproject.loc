@@ -9,9 +9,11 @@
                         <a href="/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
                     </h2>
                     <p>
-                        <?= $article->getText() ?>
+                        <?= $article->getShortText() ?><br>
                     </p>
                     <p class="post-meta">Опубликовано в <?= $article->getCreatedAt() ?></p>
+                    <a style="width: 300px" href="/articles/<?= $article->getId() ?>"
+                       class="btn btn-primary">Читать полностью &rarr;</a>
                 </div>
                 <hr>
             <?php endforeach; ?>

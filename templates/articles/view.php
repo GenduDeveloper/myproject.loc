@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p><?= $article->getText() ?></p>
+                    <p><?= $article->getParsedText() ?></p>
                     <p class="post-meta"><strong>Автор статьи:</strong> <?= $article->getAuthor()->getNickname() ?>.</p>
                     <?php if ($user !== null && $user->isAdmin()): ?>
                         <a style="width: 300px" href="/articles/<?= $article->getId() ?>/edit"
