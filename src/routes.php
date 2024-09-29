@@ -5,9 +5,9 @@ return [
     '~^articles/(\d+)/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'edit'],
     '~^articles/add$~' => [\MyProject\Controllers\ArticlesController::class, 'add'],
     '~^articles/(\d+)/delete$~' => [MyProject\Controllers\ArticlesController::class, 'delete'],
-    '~^articles/(\d+)/comments~' => [\MyProject\Controllers\CommentsController::class, 'addComment'],
-    '~^comments/(\d+)/edit~' => [\MyProject\Controllers\CommentsController::class, 'editComment'],
-    '~^comments/(\d+)/delete~' => [\MyProject\Controllers\CommentsController::class, 'deleteComment'],
+    '~^articles/(\d+)/comments$~' => [\MyProject\Controllers\CommentsController::class, 'addComment'],
+    '~^comments/(\d+)/edit$~' => [\MyProject\Controllers\CommentsController::class, 'editComment'],
+    '~^comments/(\d+)/delete$~' => [\MyProject\Controllers\CommentsController::class, 'deleteComment'],
     '~^users/register$~' => [\MyProject\Controllers\UsersController::class, 'signUp'],
     '~^users/(\d+)/activate/(.+)$~' => [\MyProject\Controllers\UsersController::class, 'activate'],
     '~^users/login$~' => [\MyProject\Controllers\UsersController::class, 'login'],
@@ -19,5 +19,5 @@ return [
     '~^users/profile/edit/password$~' => [\MyProject\Controllers\ProfilesController::class, 'editPassword'],
     '~^admin$~' => [\MyProject\Controllers\AdminsController::class, 'viewAdmin'],
     '~^admin/articles$~' => [\MyProject\Controllers\AdminsController::class, 'allArticles'],
-    '~^admin/(\d+)/comments~' => [\MyProject\Controllers\AdminsController::class, 'allCommentsFromArticle']
+    '~^admin/(\d+)/comments$~' => [\MyProject\Controllers\AdminsController::class, 'allCommentsFromArticle']
 ];
