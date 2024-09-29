@@ -86,7 +86,7 @@
                 <?php elseif (!empty($article)): ?>
                     <div class="site-heading">
                         <div class="text-background">
-                            <h1><?= $article->getName() ?></h1>
+                            <h1><?= htmlentities($article->getName()) ?></h1>
                         </div>
                     </div>
                 <?php endif; ?>

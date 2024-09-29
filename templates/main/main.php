@@ -6,15 +6,15 @@
             <?php foreach ($articles as $article): ?>
                 <div class="post-preview">
                     <h2 class="post-title">
-                        <a href="/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
+                        <a href="/articles/<?= $article->getId() ?>"><?= htmlentities($article->getName()) ?></a>
                     </h2>
                     <p>
-                        <?= $article->getShortText() ?><br>
+                        <?= htmlentities($article->getShortText()) ?><br>
                     </p>
                     <p class="post-meta">Опубликовано в <?= $article->getCreatedAt() ?></p>
-                    <a style="width: 300px" href="/articles/<?= $article->getId() ?>"
-                       class="btn btn-primary">Читать полностью &rarr;</a>
                 </div>
+                <a style="width: 300px" href="/articles/<?= $article->getId() ?>"
+                   class="btn btn-primary">Читать полностью &rarr;</a>
                 <hr>
             <?php endforeach; ?>
             <ul class="pager">

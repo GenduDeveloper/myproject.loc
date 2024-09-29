@@ -10,12 +10,12 @@
         <div class="form-group">
             <label for="name">Название статьи</label>
             <input type="text" class="form-control" placeholder="Название статьи" id="name" name="name"
-                   value="<?= htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                   value="<?= $_POST['name'] ?? '' ?>">
         </div>
         <div class="form-group">
             <label for="text">Текст статьи</label>
             <textarea class="form-control" name="text" id="text" rows="10"
-                      cols="80"><?= htmlspecialchars($_POST['text'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                      cols="80"><?= $_POST['text'] ?? '' ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Создать</button>
     </form>

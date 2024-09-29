@@ -8,7 +8,7 @@
                         <div class="media mb-4">
                             <div class="media-body">
                                 <h6 class="mt-0"><?= $comment->getAuthorComment()->getNickname() ?></h6>
-                                <?= $comment->getComment() ?><br>
+                                <?= htmlentities($comment->getComment()) ?><br>
                                 <a style="width: 300px" href="/comments/<?= $comment->getId() ?>/edit"
                                    class="btn btn-warning">Изменить</a>
                             </div>

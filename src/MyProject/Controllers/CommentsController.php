@@ -45,6 +45,7 @@ class CommentsController extends AbstractController
         }
 
         $comment = Comment::getById($commentId);
+        $admin = $this->user->isAdmin();
 
         if ($comment === null) {
             throw new NotFoundException('Комментарий не найден');
@@ -73,7 +74,8 @@ class CommentsController extends AbstractController
         $this->view->renderHtml('comments/edit.php',
             [
                 'pageName' => 'Изменение комментария',
-                'comment' => $comment
+                'comment' => $comment,
+                'admin' => $admin
             ]);
     }
 
