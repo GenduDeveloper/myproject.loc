@@ -14,12 +14,14 @@
         <div class="form-group">
             <label for="comment" style="text-align: center">Ваш комментарий</label>
             <textarea class="form-control" name="comment" id="comment" rows="10"
-                      cols="80"><?= htmlspecialchars($_POST['comment'] ?? $comment->getComment()) ?></textarea>
+                      cols="80"><?= $_POST['comment'] ?? $comment->getComment() ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Изменить</button>
         <br>
-        <a href="/comments/<?= $comment->getId() ?>/delete"
-           class="btn btn-danger">Удалить</a><br>
+        <?php if ($admin): ?>
+            <a href="/comments/<?= $comment->getId() ?>/delete"
+               class="btn btn-danger">Удалить</a><br>
+        <?php endif; ?>
     </form>
 </div>
 
