@@ -20,6 +20,15 @@
                    class="btn btn-warning">Комментарии к статье</a>
                 <hr>
             <?php endforeach; ?>
+            <ul class="pager">
+                <?php for ($pageNum = 1; $pageNum <= $pagesCount; $pageNum++): ?>
+                    <?php if ($currentPageNum === $pageNum): ?>
+                        <b><?= $pageNum ?></b>
+                    <?php else: ?>
+                        <a href="/admin/articles/<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </ul>
         </div>
     </div>
 </div>
