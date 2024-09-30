@@ -142,6 +142,28 @@ abstract class ActiveRecordEntity
         return $db->query('SELECT * FROM ' . static::getTableName() . ' ORDER BY id DESC', [], static::class);
     }
 
+    public static function getPagesCount(int $itemsPerPages): int
+    {
+        $db = Db::getInstance();
+        $result = $db->query('SELECT COUNT(*) AS cnt FROM ' . static::getTableName());
+        return ceil($result[0]->cnt / $itemsPerPages);
+    }
+
+    public static function getPage(int $pageNum, int $itemsPerPages): array
+    {
+        $db = Db::getInstance();
+        return $db->query(
+            sprintf(
+                'SELECT * FROM %s ORDER BY id DESC LIMIT %d OFFSET %d',
+                static::getTableName(),
+                $itemsPerPages,
+                ($pageNum - 1) * $itemsPerPages
+            ),
+            [],
+            static::class
+        );
+    }
+
     abstract protected static function getTableName(): string;
 
 }

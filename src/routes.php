@@ -13,11 +13,13 @@ return [
     '~^users/login$~' => [\MyProject\Controllers\UsersController::class, 'login'],
     '~^users/logout$~' => [\MyProject\Controllers\UsersController::class, 'logout'],
     '~^$~' => [\MyProject\Controllers\MainController::class, 'main'],
+    '~^(\d+)$~' => [\MyProject\Controllers\MainController::class, 'page'],
     '~^users/profile$~' => [\MyProject\Controllers\ProfilesController::class, 'showProfile'],
     '~^users/profile/edit$~' => [\MyProject\Controllers\ProfilesController::class, 'editProfile'],
     '~^users/profile/edit/name$~' => [\MyProject\Controllers\ProfilesController::class, 'editName'],
     '~^users/profile/edit/password$~' => [\MyProject\Controllers\ProfilesController::class, 'editPassword'],
-    '~^admin$~' => [\MyProject\Controllers\AdminsController::class, 'viewAdmin'],
-    '~^admin/articles$~' => [\MyProject\Controllers\AdminsController::class, 'allArticles'],
+    '~^admin$~' => [\MyProject\Controllers\AdminsController::class, 'mainAdmin'],
+    '~^admin/articles$~' => [\MyProject\Controllers\AdminsController::class, 'viewArticles'],
+    '~^admin/articles/(\d+)$~' => [\MyProject\Controllers\AdminsController::class, 'articlesPages'],
     '~^admin/(\d+)/comments$~' => [\MyProject\Controllers\AdminsController::class, 'allCommentsFromArticle']
 ];

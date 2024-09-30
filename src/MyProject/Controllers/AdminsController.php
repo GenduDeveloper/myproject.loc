@@ -11,7 +11,7 @@ use MyProject\Models\Comments\Comment;
 
 class AdminsController extends AbstractController
 {
-    public function viewAdmin(): void
+    public function mainAdmin(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -27,7 +27,7 @@ class AdminsController extends AbstractController
             ]);
     }
 
-    public function allArticles(): void
+    public function viewArticles(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -37,17 +37,31 @@ class AdminsController extends AbstractController
             throw new ForbiddenException('Недостаточно прав');
         }
 
-        $articles = Article::findAll();
+        $this->articlesPages(1);
+    }
 
-        if (!$articles) {
-            throw new ArticlesNotFoundException('Ни одной статьи не найдено');
+    public function articlesPages(int $pageNum): void
+    {
+        if ($this->user === null) {
+            throw new UnauthorizedException('Вы не авторизованы');
+        }
+
+        if (!$this->user->isAdmin()) {
+            throw new ForbiddenException('Недостаточно прав');
+        }
+
+        $articles = Article::getPage($pageNum, 5);
+
+        if (empty($articles)) {
+            throw new ArticlesNotFoundException('Не найдено ни одной статьи');
         }
 
         $this->view->renderHtml('admins/allArticles.php',
-            [
-                'pageName' => 'Статьи',
-                'articles' => $articles,
-            ]);
+        [
+            'articles' => $articles,
+            'pagesCount' => Article::getPagesCount(5),
+            'currentPageNum' => $pageNum,
+        ]);
     }
 
     public function allCommentsFromArticle(int $articleId): void
