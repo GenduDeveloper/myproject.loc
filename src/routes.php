@@ -4,7 +4,7 @@ return [
     '~^articles/(\d+)$~' => [\MyProject\Controllers\ArticlesController::class, 'view'],
     '~^articles/(\d+)/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'edit'],
     '~^articles/add$~' => [\MyProject\Controllers\ArticlesController::class, 'add'],
-    '~^articles/(\d+)/delete$~' => [MyProject\Controllers\ArticlesController::class, 'delete'],
+    '~^articles/(\d+)/delete$~' => [\MyProject\Controllers\ArticlesController::class, 'delete'],
     '~^articles/(\d+)/comments$~' => [\MyProject\Controllers\CommentsController::class, 'addComment'],
     '~^comments/(\d+)/edit$~' => [\MyProject\Controllers\CommentsController::class, 'editComment'],
     '~^comments/(\d+)/delete$~' => [\MyProject\Controllers\CommentsController::class, 'deleteComment'],
