@@ -9,7 +9,7 @@ use MyProject\Models\Users\User;
 
 class ProfilesController extends AbstractController
 {
-    public function showProfile(): void
+    public function show(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -29,7 +29,7 @@ class ProfilesController extends AbstractController
             ]);
     }
 
-    public function editProfile(): void
+    public function edit(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
