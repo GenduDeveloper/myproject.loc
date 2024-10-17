@@ -11,7 +11,7 @@ use MyProject\Models\Comments\Comment;
 
 class AdminsController extends AbstractController
 {
-    public function mainAdmin(): void
+    public function main(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -27,7 +27,7 @@ class AdminsController extends AbstractController
             ]);
     }
 
-    public function viewArticles(): void
+    public function view(): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');

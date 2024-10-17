@@ -12,7 +12,7 @@ use MyProject\Models\Comments\Comment;
 
 class CommentsController extends AbstractController
 {
-    public function addComment(int $articleId): void
+    public function add(int $articleId): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -38,7 +38,7 @@ class CommentsController extends AbstractController
         }
     }
 
-    public function editComment(int $commentId): void
+    public function edit(int $commentId): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
@@ -79,7 +79,7 @@ class CommentsController extends AbstractController
             ]);
     }
 
-    public function deleteComment(int $commentId): void
+    public function delete(int $commentId): void
     {
         if ($this->user === null) {
             throw new UnauthorizedException('Вы не авторизованы');
